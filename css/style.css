@@ -78,6 +78,7 @@ img {
 }
 
 .header-link {
+  position: relative;
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--color-primary-dark);
@@ -118,24 +119,13 @@ img {
 .address {
   margin-left: auto;
 }
-.studio-item::after {
+.header-link.current::after {
+  position: absolute;
+  bottom: -1px;
   content: "";
   display: block;
-  width: 48px;
+  width: 100%;
   height: 4px;
-  background-color: currentColor;
-  border-radius: 2px;
-
-  left: 0px;
-  top: 48px;
-}
-.portfolio-item-decor::after {
-  content: "";
-  display: block;
-  width: 66px;
-  height: 4px;
-  left: 0px;
-  top: 48px;
   background-color: currentColor;
   border-radius: 2px;
 }
@@ -405,7 +395,7 @@ footer {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
-  color: #ffffff;
+  color: var(--color-primary-inverted);
   margin-bottom: 16px;
 }
 .media-list {
@@ -455,12 +445,15 @@ footer {
   letter-spacing: 0.04em;
   padding: 12px 24px;
   align-items: center;
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .filters-btn:hover,
 .filters-btn:focus {
   color: var(--color-primary-inverted);
-  background: var(--color-secondary);
+  background-color: var(--color-secondary);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
   border-color: transparent;
@@ -513,6 +506,7 @@ footer {
   border-bottom: 1px solid #e7e9fc;
   border-right: 1px solid #e7e9fc;
 }
+/*  Overlay */
 
 .visually-hidden {
   position: absolute;
@@ -546,7 +540,6 @@ footer {
   left: 0px;
   top: 0px;
 
-  overflow-y: scroll;
   transform: translate(0, 100%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -554,6 +547,9 @@ footer {
 .portfolio-link:focus .overlay {
   transform: translate(0, 0);
 }
+
+/* Modal */
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -561,7 +557,13 @@ footer {
   width: 100%;
   height: 100%;
   background-color: rgba(46, 47, 66, 0.4);
-  z-index: 100;
+  padding: 20px 0;
+
+  /*z-index: ;*/
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
     visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -575,41 +577,47 @@ footer {
 
 .modal {
   position: absolute;
-  width: 408px;
-  height: 376px;
-  left: 50%;
+  max-width: 408px;
+  max-height: 576px;
+  width: 100%;
+  height: 100%;
+
+  overflow: auto;
+  /* left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);*/
 
   background-color: #fcfcfc;
-  /*box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
     0px 2px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;*/
+  border-radius: 4px;
 }
+
 .modal-close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 24px;
+  right: 24px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
 
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #e7e9fc;
   fill: #000000;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+
   /*padding: ;*/
 
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .modal-close-btn:hover,
 .modal-close-btn:focus {
-  fill: #ffffff;
+  fill: var(--color-primary-inverted);
   background-color: #404bbf;
 }
